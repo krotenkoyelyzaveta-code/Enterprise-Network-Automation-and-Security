@@ -1,64 +1,54 @@
 # Enterprise Campus Network Infrastructure — Phase 1
 
-A scalable and highly available multi-tier Enterprise Campus Network architecture designed and simulated within **EVE-NG**. This repository contains the fully functional baseline infrastructure (routing, switching, redundancy, and IP management) for a large-scale corporate network consisting of **20 devices**.
+A scalable and highly available multi-tier Enterprise Campus Network architecture designed and simulated within **EVE-NG**.  
+This repository contains the baseline infrastructure (routing, switching, redundancy, and IP management) for a large-scale corporate network consisting of **19 devices**.
+
 ---
-## Network Topology
-!(topology.png)
+
+##  Network Topology
+![Topology](topology.png)
+
 ---
+
 ##  Network Architecture (19 Devices)
-The infrastructure mimics a real-world enterprise deployment, split into functional layers to ensure traffic isolation, redundancy, and easy scaling:
 
-* **Dedicated DHCP Server (1 Device):** Centralized router handling IP address management (IPAM) and dynamic lease allocation across all corporate subnets.
-  
-* **Edge Layer (2 Devices):** Perimeter routing and external connectivity baseline.
+The infrastructure mimics a real-world enterprise deployment, split into functional layers:
 
-* **Server Farm (2 Devices):** Dedicated segment for internal corporate servers and resources.
+- **DHCP Server (1):** Central IP address management
+- **Edge Layer (2):** Perimeter routing and external connectivity
+- **Server Farm (2):** Internal corporate services
+- **Core Layer (2):** High-speed backbone switching
+- **Distribution Layer (4):** Aggregation + HSRP redundancy
+- **Access Layer (8):** End-user connectivity
 
-* **Core Layer (2 Devices):** High-speed switching backbone handling core routing protocols.
-
-* **Distribution Layer (4 Devices):** Aggregates Access layer switches and provides gateway redundancy.
-
-* **Access Layer (8 Devices):** End-user connectivity layer providing access to local network segments.
 ---
-##  Phase 1: Core Features Implemented & Working
 
-* **Hierarchical Topology:** Full 3-tier campus network design (Core, Distribution, Access) + Edge and Server Farm blocks.
+##  Phase 1 Features Implemented
 
-* **First-Hop Redundancy (HSRP):** Configured on the Distribution layer to provide default gateway redundancy and high availability for end-users.
+- **Hierarchical Topology:** 3-tier design (Core / Distribution / Access)
+- **HSRP:** Gateway redundancy on Distribution layer
+- **STP:** Loop prevention and optimized paths
+- **VLANs & Trunks:** Network segmentation (802.1Q)
+- **DHCP:** Centralized IP assignment
+- **Inter-VLAN Routing:** Communication between VLANs
 
-* **Layer 2 Optimization (Spanning Tree):** Configured to prevent network loops, optimize traffic paths, and ensure fast convergence across all 14 switches.
-
-* **VLAN & Trunking:** Logical network segmentation via VLANs with standard 802.1Q trunking links between switches.
-
-* **IP Address Management:** Centralized DHCP pools configured to automatically assign IP addresses to end devices across different VLANs.
-
-* **Inter-VLAN Routing:** Seamless communication between different departments/VLANs routed via the core layers.
 ---
+
 ##  Repository Structure
 
-* `Edge_Routers.txt` — Edge routing configurations.
+- `Edge_Routers.txt` — Edge routing configs  
+- `Farm_Switches.txt` — Server farm switching  
+- `Core_Switches.txt` — Core backbone configs  
+- `Distribution_Switches.txt` — HSRP + VLAN routing  
+- `Access_Switches.txt` — Access layer templates  
+- `DHCP_Router.txt` — DHCP configuration  
 
-* `Farm_Switches.txt` — Server infrastructure connectivity baseline.
-
-* `Core_Switches.txt` — Core backbone routing configurations.
-
-* `Distribution_Switches.txt` — Distribution layer with HSRP and VLAN routing.
-
-* `Access_Switches.txt` — Standardized Access layer configuration templates with Spanning Tree settings.
-  
-* `DHCP_Router.txt` — Centralized DHCP server configurations and IP address management.
 ---
-##  Roadmap (Next Phases)
-### Phase 2: Advanced Services, Security & Redundancy Testing
 
-* **Internet Edge & Security:** Implement NAT/PAT and Access Control Lists (ACLs) to enable secure internet access for internal segments.
+##  Roadmap (Phase 2)
 
-* **High Availability Validation:** Perform rigorous failover testing of HSRP gateways and path redundancy to ensure zero-downtime traffic forwarding.
-
-* **Embedded Automation (EEM):** Deploy Cisco Embedded Event Manager (EEM) applets for basic automated troubleshooting and logging on network devices.
-
-* **VLAN Architecture Deep-Dive:** Restructure and optimize the switching environment by analyzing Local vs. End-to-End VLAN models.
-
-* **Enterprise Server Farm Integration:** Connect a Windows Server workstation to the corporate network, deploy Active Directory Domain Services (AD DS), and configure the Domain Controller.
-
-* **Network Backup & Recovery:** Implement an automated configuration backup system (via TFTP/SFTP or specialized scripts) for all network equipment.
+- NAT/PAT + ACL security
+- HSRP failover testing
+- VLAN redesign optimization
+- Windows Server + AD integration
+- Automated configuration backups
