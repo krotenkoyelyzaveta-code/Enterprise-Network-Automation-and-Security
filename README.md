@@ -5,9 +5,11 @@ A scalable and highly available multi-tier Enterprise Campus Network architectur
 ## Network Topology
 !(topology.png)
 ---
-##  Network Architecture (20 Devices)
+##  Network Architecture (19 Devices)
 The infrastructure mimics a real-world enterprise deployment, split into functional layers to ensure traffic isolation, redundancy, and easy scaling:
 
+* **Dedicated DHCP Server (1 Device):** Centralized router handling IP address management (IPAM) and dynamic lease allocation across all corporate subnets.
+  
 * **Edge Layer (2 Devices):** Perimeter routing and external connectivity baseline.
 
 * **Server Farm (2 Devices):** Dedicated segment for internal corporate servers and resources.
@@ -43,6 +45,8 @@ The infrastructure mimics a real-world enterprise deployment, split into functio
 * `Distribution_Switches.txt` — Distribution layer with HSRP and VLAN routing.
 
 * `Access_Switches.txt` — Standardized Access layer configuration templates with Spanning Tree settings.
+  
+* `DHCP_Router.txt` — Centralized DHCP server configurations and IP address management.
 ---
 ##  Roadmap (Next Phases)
 ### Phase 2: Advanced Services, Security & Redundancy Testing
