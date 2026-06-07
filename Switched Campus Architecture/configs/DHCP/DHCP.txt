@@ -1,0 +1,158 @@
+Current configuration : 2442 bytes
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname DHCP
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+ip cef
+!
+!
+ip dhcp excluded-address 192.168.3.1
+ip dhcp excluded-address 192.168.2.1
+ip dhcp excluded-address 192.168.4.1
+ip dhcp excluded-address 192.168.5.1
+ip dhcp excluded-address 192.168.6.1
+ip dhcp excluded-address 192.168.7.1
+ip dhcp excluded-address 192.168.2.50 192.168.2.51
+ip dhcp excluded-address 192.168.3.50 192.168.3.51
+ip dhcp excluded-address 192.168.4.50 192.168.4.51
+ip dhcp excluded-address 192.168.5.50 192.168.5.51
+ip dhcp excluded-address 192.168.6.50 192.168.6.51
+ip dhcp excluded-address 192.168.7.50 192.168.7.51
+!
+ip dhcp pool VLAN2POOL
+   network 192.168.2.0 255.255.255.0
+   default-router 192.168.2.1
+   dns-server 192.168.0.1
+   lease 5
+!
+ip dhcp pool VLAN3POOL
+   network 192.168.3.0 255.255.255.0
+   default-router 192.168.3.1
+   dns-server 192.168.0.1
+   lease 5
+!
+ip dhcp pool VLAN4POOL
+   network 192.168.4.0 255.255.255.0
+   default-router 192.168.4.1
+   dns-server 192.168.0.1
+   lease 5
+!
+ip dhcp pool VLAN5POOL
+   network 192.168.5.0 255.255.255.0
+   default-router 192.168.5.1
+   dns-server 192.168.0.1
+   lease 5
+!
+ip dhcp pool VLAN6POOL
+   network 192.168.6.0 255.255.255.0
+   default-router 192.168.6.1
+   dns-server 192.168.0.1
+   lease 5
+!
+ip dhcp pool VLAN7POOL
+   network 192.168.7.0 255.255.255.0
+   default-router 192.168.7.1
+   dns-server 192.168.0.1
+   lease 5
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 60.0.1.1 255.255.255.0
+ !
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface FastEthernet1/0
+ ip address 20.0.1.1 255.255.255.0
+ duplex full
+ !
+!
+interface FastEthernet2/0
+ ip address 20.0.2.1 255.255.255.0
+ duplex full
+ !
+!
+router ospf 1
+ router-id 11.11.11.11
+ log-adjacency-changes
+ network 20.0.1.0 0.0.0.255 area 0
+ network 20.0.0.0 0.0.255.255 area 0
+ network 60.0.1.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+end

@@ -1,0 +1,110 @@
+Current configuration : 1117 bytes
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname EdgeRT2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+interface FastEthernet1/0
+ ip address 10.0.3.2 255.255.255.0
+ duplex full
+ !
+!
+interface FastEthernet2/0
+ ip address 10.0.2.2 255.255.255.0
+ duplex full
+ !
+!
+interface FastEthernet3/0
+ ip address 172.20.20.1 255.255.255.0
+ duplex half
+ !
+!
+router ospf 1
+ router-id 6.6.6.6
+ log-adjacency-changes
+ network 10.0.0.0 0.0.255.255 area 0
+ network 172.20.20.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+end

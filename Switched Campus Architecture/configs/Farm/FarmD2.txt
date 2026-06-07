@@ -1,0 +1,132 @@
+Current configuration : 1781 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname FarmD2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+memory-size iomem 5
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+multilink bundle-name authenticated
+!
+!
+!
+port-channel load-balance src-dst-mac
+!
+!
+archive
+ log config
+  hidekeys
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+interface Loopback0
+ ip address 50.0.10.1 255.255.255.0
+!
+interface Port-channel1
+ switchport mode trunk
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ no switchport
+ ip address 10.0.17.1 255.255.255.0
+!
+interface FastEthernet1/1
+ no switchport
+ ip address 10.0.16.1 255.255.255.0
+!
+interface FastEthernet1/2
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface FastEthernet1/3
+ no switchport
+ ip address 20.0.2.2 255.255.255.0
+!
+interface FastEthernet1/4
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface FastEthernet1/5
+!
+interface FastEthernet1/6
+!
+interface FastEthernet1/7
+!
+interface FastEthernet1/8
+!
+interface FastEthernet1/9
+!
+interface FastEthernet1/10
+!
+interface FastEthernet1/11
+!
+interface FastEthernet1/12
+!
+interface FastEthernet1/13
+!
+interface FastEthernet1/14
+!
+interface FastEthernet1/15
+!
+interface Vlan1
+ no ip address
+!
+router ospf 1
+ router-id 10.10.10.10
+ log-adjacency-changes
+ network 10.0.0.0 0.0.255.255 area 0
+ network 20.0.0.0 0.0.255.255 area 0
+ network 50.0.10.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
+!
+end

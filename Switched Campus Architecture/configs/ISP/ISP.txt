@@ -1,0 +1,123 @@
+Current configuration : 1541 bytes
+!
+upgrade fpd auto
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname ISP
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+ip source-route
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly
+ duplex half
+ !
+!
+interface FastEthernet1/0
+ ip address 165.24.56.7 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly
+ duplex half
+ !
+!
+interface FastEthernet2/0
+ ip address 218.56.23.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly
+ duplex half
+ !
+!
+interface FastEthernet3/0
+ no ip address
+ shutdown
+ duplex half
+ !
+!
+router ospf 1
+ log-adjacency-changes
+ default-information originate always route-map DAFAULT-INFORMATION
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip nat inside source list 7 interface FastEthernet0/0 overload
+ip route 155.155.155.155 255.255.255.255 Null0 track 1
+!
+!
+ip prefix-list control_route seq 10 permit 155.155.155.155/32
+access-list 7 permit 165.24.56.0 0.0.0.255
+access-list 7 permit 218.56.23.0 0.0.0.255
+!
+!
+!
+!
+route-map DEFAULT-INFORMATION permit 10
+ match ip address prefix-list control_route
+!
+!
+!
+control-plane
+ !
+!
+!
+mgcp fax t38 ecm
+mgcp behavior g729-variants static-pt
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+end

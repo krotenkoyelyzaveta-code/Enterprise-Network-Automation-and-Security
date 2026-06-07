@@ -1,0 +1,135 @@
+Current configuration : 1858 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname CoreSW1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+memory-size iomem 5
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+archive
+ log config
+  hidekeys
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+interface Loopback0
+ ip address 50.0.5.1 255.255.255.0
+!
+interface FastEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ no switchport
+ ip address 10.0.5.2 255.255.255.0
+!
+interface FastEthernet1/1
+ no switchport
+ ip address 10.0.7.2 255.255.255.0
+!
+interface FastEthernet1/2
+ no switchport
+ ip address 10.0.9.1 255.255.255.0
+!
+interface FastEthernet1/3
+ no switchport
+ ip address 10.0.10.1 255.255.255.0
+!
+interface FastEthernet1/4
+ no switchport
+ ip address 10.0.13.1 255.255.255.0
+!
+interface FastEthernet1/5
+ no switchport
+ ip address 10.0.1.2 255.255.255.0
+!
+interface FastEthernet1/6
+ no switchport
+ ip address 10.0.3.2 255.255.255.0
+!
+interface FastEthernet1/7
+ no switchport
+ ip address 10.0.14.2 255.255.255.0
+!
+interface FastEthernet1/8
+ no switchport
+ ip address 10.0.17.2 255.255.255.0
+!
+interface FastEthernet1/9
+!
+interface FastEthernet1/10
+!
+interface FastEthernet1/11
+!
+interface FastEthernet1/12
+!
+interface FastEthernet1/13
+!
+interface FastEthernet1/14
+!
+interface FastEthernet1/15
+!
+interface Vlan1
+ no ip address
+!
+router ospf 1
+ router-id 5.5.5.5
+ log-adjacency-changes
+ network 10.0.0.0 0.0.255.255 area 0
+ network 50.0.5.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
+!
+end
