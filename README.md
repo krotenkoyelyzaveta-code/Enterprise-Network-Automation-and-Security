@@ -1,4 +1,4 @@
-# Enterprise Campus Network Infrastructure — Phase 1
+# Monolithic / lab initial setup — Phase 1
 
 A scalable and highly available multi-tier Enterprise Campus Network architecture designed and simulated within **EVE-NG**.  
 This repository contains the baseline infrastructure (routing, switching, redundancy, and IP management) for a large-scale corporate network consisting of **19 devices**.
